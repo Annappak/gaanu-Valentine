@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Gaanu 💖</title>
+
+<style>
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background: linear-gradient(135deg,#f8d7da,#fff1f3);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.card{
+    background:#ffffff;
+    padding:40px 60px;
+    border-radius:18px;
+    text-align:center;
+    box-shadow:0 10px 25px rgba(0,0,0,.15);
+    position:relative;
+    min-width:320px;
+}
+
+h1{
+    margin:0;
+    font-size:28px;
+    color:#333;
+}
+
+small{
+    display:block;
+    margin-top:8px;
+    color:#777;
+}
+
+.buttons{
+    margin-top:30px;
+    position:relative;
+    height:60px;
+}
+
+button{
+    padding:10px 22px;
+    border:none;
+    border-radius:8px;
+    font-size:16px;
+    cursor:pointer;
+}
+
+#yesBtn{
+    background:#ff4d6d;
+    color:white;
+}
+
+#noBtn{
+    background:#eaeaea;
+    color:#333;
+    position:absolute;
+    left:0;
+    top:0;
+}
+
+.hearts{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    overflow:hidden;
+}
+
+.heart{
+    position:absolute;
+    font-size:18px;
+    animation: float 3s linear forwards;
+}
+
+@keyframes float{
+    from{transform:translateY(0);opacity:1;}
+    to{transform:translateY(-120px);opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    <div class="hearts" id="hearts"></div>
+
+    <h1>
+        Gaanu,<br>
+        will you be my Valentine? 💖💞
+    </h1>
+
+    <small>Choose wisely. (The "No" button is shy 😉)</small>
+
+    <div class="buttons">
+        <button id="noBtn">No</button>
+        <button id="yesBtn">Yes</button>
+    </div>
+</div>
+
+<script>
+const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
+const card = document.querySelector(".card");
+const hearts = document.getElementById("hearts");
+
+const texts = ["No", "Think again 🙂", "Really?", "Are you sure?", "Try again 😜"];
+let t = 0;
+
+function moveNo(){
+    const rect = card.getBoundingClientRect();
+
+    const maxX = rect.width - noBtn.offsetWidth - 20;
+    const x = Math.random() * maxX;
+
+    const y = Math.random() * 30;
+
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+
+    t = (t + 1) % texts.length;
+    noBtn.innerText = texts[t];
+}
+
+noBtn.addEventListener("mouseenter", moveNo);
+noBtn.addEventListener("click", moveNo);
+
+yesBtn.addEventListener("click", () => {
+
+    alert("Yay! 💖 I knew you would say YES!");
+
+    for(let i=0;i<25;i++){
+        createHeart();
+    }
+});
+
+function createHeart(){
+    const h = document.createElement("span");
+    h.className = "heart";
+    h.textContent = "💖";
+    h.style.left = Math.random()*100 + "%";
+    h.style.bottom = "0px";
+    hearts.appendChild(h);
+
+    setTimeout(()=>h.remove(),3000);
+}
+</script>
+
+</body>
+</html>
