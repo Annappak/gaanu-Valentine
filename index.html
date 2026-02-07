@@ -2,151 +2,144 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>For Gaanu 💖</title>
+<title>For My Gaanu ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 body{
-    margin:0;
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background: linear-gradient(135deg,#f8d7da,#fff1f3);
-    font-family: Arial, Helvetica, sans-serif;
+  margin:0;
+  height:100vh;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg,#ff5f9e,#ff9a9e);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
 }
 
 .card{
-    background:#ffffff;
-    padding:40px 60px;
-    border-radius:18px;
-    text-align:center;
-    box-shadow:0 10px 25px rgba(0,0,0,.15);
-    position:relative;
-    min-width:320px;
+  background:white;
+  padding:30px 22px;
+  border-radius:18px;
+  text-align:center;
+  width:90%;
+  max-width:380px;
+  box-shadow:0 15px 40px rgba(0,0,0,.2);
 }
 
 h1{
-    margin:0;
-    font-size:28px;
-    color:#333;
+  color:#ff2d6f;
+  margin-bottom:10px;
 }
 
-small{
-    display:block;
-    margin-top:8px;
-    color:#777;
-}
-
-.buttons{
-    margin-top:30px;
-    position:relative;
-    height:60px;
+p{
+  font-size:17px;
+  color:#444;
 }
 
 button{
-    padding:10px 22px;
-    border:none;
-    border-radius:8px;
-    font-size:16px;
-    cursor:pointer;
+  border:none;
+  padding:12px 26px;
+  border-radius:30px;
+  font-size:16px;
+  cursor:pointer;
+  margin:10px;
 }
 
 #yesBtn{
-    background:#ff4d6d;
-    color:white;
+  background:#ff2d6f;
+  color:white;
 }
 
 #noBtn{
-    background:#eaeaea;
-    color:#333;
-    position:absolute;
-    left:0;
-    top:0;
+  background:#eee;
 }
 
-.hearts{
-    position:absolute;
-    inset:0;
-    pointer-events:none;
-    overflow:hidden;
+.result{
+  display:none;
+  text-align:center;
+  color:white;
+  animation: fadeIn 1s ease;
 }
 
+.result h1{
+  font-size:34px;
+  margin-bottom:10px;
+}
+
+@keyframes fadeIn{
+  from{opacity:0; transform:scale(.9);}
+  to{opacity:1; transform:scale(1);}
+}
+
+/* floating hearts */
 .heart{
-    position:absolute;
-    font-size:18px;
-    animation: float 3s linear forwards;
+  position:fixed;
+  bottom:-20px;
+  font-size:22px;
+  animation: float 6s linear infinite;
+  opacity:.8;
 }
 
 @keyframes float{
-    from{transform:translateY(0);opacity:1;}
-    to{transform:translateY(-120px);opacity:0;}
+  0%{transform:translateY(0);opacity:1;}
+  100%{transform:translateY(-110vh);opacity:0;}
 }
 </style>
 </head>
-
 <body>
 
-<div class="card">
-    <div class="hearts" id="hearts"></div>
+<div class="card" id="questionCard">
+  <h1>Hi Gaanu 💖</h1>
+  <p>
+    From the first smile to every small moment,<br>
+    you make my world beautiful.<br><br>
+    Will you be my Valentine? 🌹
+  </p>
 
-    <h1>
-        Gaanu,<br>
-        will you be my Valentine? 💖💞
-    </h1>
+  <button id="yesBtn" onclick="showLove()">Yes 💕</button>
+  <button id="noBtn" onclick="moveNo()">No 🙈</button>
+</div>
 
-    <small>Choose wisely. (The "No" button is shy 😉)</small>
+<div class="result" id="resultPage">
+  <h1>Yay Gaanu! 💖</h1>
+  <p style="font-size:18px;">
+    I knew you would say YES! 😍<br><br>
+    Thank you for making my heart smile.<br>
+    This Valentine is special because of you. 🌹
+  </p>
 
-    <div class="buttons">
-        <button id="noBtn">No</button>
-        <button id="yesBtn">Yes</button>
-    </div>
+  <p style="margin-top:15px;font-size:16px;">
+    – From Arya 💌
+  </p>
 </div>
 
 <script>
-const noBtn = document.getElementById("noBtn");
-const yesBtn = document.getElementById("yesBtn");
-const card = document.querySelector(".card");
-const hearts = document.getElementById("hearts");
+function showLove(){
+  document.getElementById("questionCard").style.display="none";
+  document.getElementById("resultPage").style.display="block";
 
-const texts = ["No", "Think again 🙂", "Really?", "Are you sure?", "Try again 😜"];
-let t = 0;
-
-function moveNo(){
-    const rect = card.getBoundingClientRect();
-
-    const maxX = rect.width - noBtn.offsetWidth - 20;
-    const x = Math.random() * maxX;
-
-    const y = Math.random() * 30;
-
-    noBtn.style.left = x + "px";
-    noBtn.style.top = y + "px";
-
-    t = (t + 1) % texts.length;
-    noBtn.innerText = texts[t];
+  setInterval(createHeart,300);
 }
 
-noBtn.addEventListener("mouseenter", moveNo);
-noBtn.addEventListener("click", moveNo);
-
-yesBtn.addEventListener("click", () => {
-
-    alert("Yay! 💖 I knew you would say YES!");
-
-    for(let i=0;i<25;i++){
-        createHeart();
-    }
-});
+function moveNo(){
+  const btn = document.getElementById("noBtn");
+  const x = Math.random() * (window.innerWidth - 80);
+  const y = Math.random() * (window.innerHeight - 40);
+  btn.style.position="fixed";
+  btn.style.left = x + "px";
+  btn.style.top = y + "px";
+}
 
 function createHeart(){
-    const h = document.createElement("span");
-    h.className = "heart";
-    h.textContent = "💖";
-    h.style.left = Math.random()*100 + "%";
-    h.style.bottom = "0px";
-    hearts.appendChild(h);
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "💖";
+  heart.style.left = Math.random()*100 + "vw";
+  heart.style.fontSize = (18 + Math.random()*14) + "px";
+  document.body.appendChild(heart);
 
-    setTimeout(()=>h.remove(),3000);
+  setTimeout(()=>{ heart.remove(); },6000);
 }
 </script>
 
