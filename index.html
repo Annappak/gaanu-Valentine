@@ -144,4 +144,114 @@ function createHeart(){
 </script>
 
 </body>
+</html>  color:#444;
+}
+
+button{
+  border:none;
+  padding:12px 26px;
+  border-radius:30px;
+  font-size:16px;
+  cursor:pointer;
+  margin:10px;
+}
+
+#yesBtn{
+  background:#ff2d6f;
+  color:white;
+}
+
+#noBtn{
+  background:#eee;
+}
+
+.result{
+  display:none;
+  text-align:center;
+  color:white;
+  animation: fadeIn 1s ease;
+}
+
+.result h1{
+  font-size:34px;
+  margin-bottom:10px;
+}
+
+@keyframes fadeIn{
+  from{opacity:0; transform:scale(.9);}
+  to{opacity:1; transform:scale(1);}
+}
+
+/* floating hearts */
+.heart{
+  position:fixed;
+  bottom:-20px;
+  font-size:22px;
+  animation: float 6s linear infinite;
+  opacity:.8;
+}
+
+@keyframes float{
+  0%{transform:translateY(0);opacity:1;}
+  100%{transform:translateY(-110vh);opacity:0;}
+}
+</style>
+</head>
+<body>
+
+<div class="card" id="questionCard">
+  <h1>Hi Gaanu 💖</h1>
+  <p>
+    From the first smile to every small moment,<br>
+    you make my world beautiful.<br><br>
+    Will you be my Valentine? 🌹
+  </p>
+
+  <button id="yesBtn" onclick="showLove()">Yes 💕</button>
+  <button id="noBtn" onclick="moveNo()">No 🙈</button>
+</div>
+
+<div class="result" id="resultPage">
+  <h1>Yay Gaanu! 💖</h1>
+  <p style="font-size:18px;">
+    I knew you would say YES! 😍<br><br>
+    Thank you for making my heart smile.<br>
+    This Valentine is special because of you. 🌹
+  </p>
+
+  <p style="margin-top:15px;font-size:16px;">
+    – From Arya 💌
+  </p>
+</div>
+
+<script>
+function showLove(){
+  document.getElementById("questionCard").style.display="none";
+  document.getElementById("resultPage").style.display="block";
+
+  setInterval(createHeart,300);
+}
+
+function moveNo(){
+  const btn = document.getElementById("noBtn");
+  const x = Math.random() * (window.innerWidth - 80);
+  const y = Math.random() * (window.innerHeight - 40);
+  btn.style.position="fixed";
+  btn.style.left = x + "px";
+  btn.style.top = y + "px";
+}
+
+function createHeart(){
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "💖";
+  heart.style.left = Math.random()*100 + "vw";
+  heart.style.fontSize = (18 + Math.random()*14) + "px";
+  document.body.appendChild(heart);
+
+  setTimeout(()=>{ heart.remove(); },6000);
+}
+</script>
+
+</body>
 </html>
