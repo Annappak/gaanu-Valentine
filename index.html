@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valentine 💖</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <audio id="bgMusic" loop>
+    <source src="https://cdn.pixabay.com/audio/2023/03/27/audio_8b2f91c3c7.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="card" id="questionCard">
+    <h1>Manu,<br>will you be my Valentine? 💗💞</h1>
+    <p class="sub">Choose wisely. (The "No" button is… shy.)</p>
+
+    <div class="buttons">
+      <button id="noBtn">NO</button>
+      <button id="yesBtn">YES</button>
+    </div>
+  </div>
+
+  <div class="card hidden" id="yesCard">
+    <h1>💖 YAY!!! 💖</h1>
+    <p>Best decision ever 😘</p>
+    <img src="https://i.imgur.com/3ZQ3Z9G.png" alt="hug" />
+    <p class="love">I love you ❤️</p>
+  </div>
+
+  <!-- Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
